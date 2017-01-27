@@ -34,8 +34,6 @@
             this.ctrUseOnlySellBuy = new System.Windows.Forms.CheckBox();
             this.ctrTBTickersName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.ctrTbSeparator = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.ctrBtStartConvert = new System.Windows.Forms.Button();
@@ -53,15 +51,15 @@
             // ctrLBRows
             // 
             this.ctrLBRows.AutoSize = true;
-            this.ctrLBRows.Location = new System.Drawing.Point(157, 145);
+            this.ctrLBRows.Location = new System.Drawing.Point(14, 149);
             this.ctrLBRows.Name = "ctrLBRows";
-            this.ctrLBRows.Size = new System.Drawing.Size(121, 13);
+            this.ctrLBRows.Size = new System.Drawing.Size(59, 13);
             this.ctrLBRows.TabIndex = 48;
-            this.ctrLBRows.Text = "Blank rows before ticket";
+            this.ctrLBRows.Text = "Blank rows";
             // 
             // ctrNumRows
             // 
-            this.ctrNumRows.Location = new System.Drawing.Point(284, 140);
+            this.ctrNumRows.Location = new System.Drawing.Point(109, 142);
             this.ctrNumRows.Name = "ctrNumRows";
             this.ctrNumRows.Size = new System.Drawing.Size(58, 20);
             this.ctrNumRows.TabIndex = 47;
@@ -99,23 +97,6 @@
             this.label4.TabIndex = 44;
             this.label4.Text = "Tickers name";
             // 
-            // ctrTbSeparator
-            // 
-            this.ctrTbSeparator.Location = new System.Drawing.Point(109, 139);
-            this.ctrTbSeparator.Name = "ctrTbSeparator";
-            this.ctrTbSeparator.Size = new System.Drawing.Size(28, 20);
-            this.ctrTbSeparator.TabIndex = 43;
-            this.ctrTbSeparator.Text = ",";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 146);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 13);
-            this.label3.TabIndex = 42;
-            this.label3.Text = "Column separator";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -128,14 +109,14 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(17, 195);
+            this.progressBar.Location = new System.Drawing.Point(17, 208);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(401, 21);
+            this.progressBar.Size = new System.Drawing.Size(413, 23);
             this.progressBar.TabIndex = 40;
             // 
             // ctrBtStartConvert
             // 
-            this.ctrBtStartConvert.Location = new System.Drawing.Point(446, 193);
+            this.ctrBtStartConvert.Location = new System.Drawing.Point(446, 208);
             this.ctrBtStartConvert.Name = "ctrBtStartConvert";
             this.ctrBtStartConvert.Size = new System.Drawing.Size(75, 23);
             this.ctrBtStartConvert.TabIndex = 39;
@@ -200,7 +181,7 @@
             // 
             // timer
             // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick_1);
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Log2Excell
             // 
@@ -211,8 +192,6 @@
             this.Controls.Add(this.ctrUseOnlySellBuy);
             this.Controls.Add(this.ctrTBTickersName);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.ctrTbSeparator);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.ctrBtStartConvert);
@@ -223,7 +202,7 @@
             this.Controls.Add(this.ctrBtSelectSource);
             this.Controls.Add(this.ctrTBSource);
             this.Name = "Log2Excell";
-            this.Size = new System.Drawing.Size(537, 225);
+            this.Size = new System.Drawing.Size(537, 234);
             ((System.ComponentModel.ISupportInitialize)(this.ctrNumRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -238,8 +217,6 @@
         private System.Windows.Forms.CheckBox ctrUseOnlySellBuy;
         private System.Windows.Forms.TextBox ctrTBTickersName;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox ctrTbSeparator;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button ctrBtStartConvert;

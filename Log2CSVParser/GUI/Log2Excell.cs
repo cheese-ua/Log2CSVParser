@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Log2CSVParser.Utilities.Log;
 using Log2CSVParser.Utilities.Structures;
@@ -14,7 +10,7 @@ namespace Log2CSVParser.GUI
 {
     public partial class Log2Excell : UserControl
     {
-        private ILogManager log = FormMain.log;
+        private readonly ILogManager log = FormMain.log;
         private Parser p;
 
         public Log2Excell()
@@ -34,14 +30,6 @@ namespace Log2CSVParser.GUI
             }
         }
 
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            try {
-                progressBar.Value = p?.percent ?? 0;
-            } catch {
-            }
-        }
 
         private void ctrChBoxIsOrder_CheckedChanged(object sender, EventArgs e)
         {
@@ -66,15 +54,10 @@ namespace Log2CSVParser.GUI
                     return;
                 }
 
-                if (string.IsNullOrEmpty(ctrTbSeparator.Text)) {
-                    MessageBox.Show("Separator is empty");
-                    return;
-                }
-
                 List<string> filter = ctrTBTickersName.Text.Trim().Length > 0
                     ? ctrTBTickersName.Text.Trim().Split(',', ';').ToList()
                     : new List<string>();
-                p = new Parser(fileSource, fileRes, ctrTbSeparator.Text, ctrChBoxIsOrder.Checked, ctrUseOnlySellBuy.Checked, filter, (int)ctrNumRows.Value, log);
+                p = new Parser(fileSource, fileRes, ctrChBoxIsOrder.Checked, ctrUseOnlySellBuy.Checked, filter, (int)ctrNumRows.Value, log);
                 timer.Enabled = true;
                 SimpleProcessResponse response = p.Start();
                 timer.Enabled = false;
@@ -104,9 +87,12 @@ namespace Log2CSVParser.GUI
             Enabled = false;
         }
 
-        private void timer_Tick_1(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-
+            try {
+                progressBar.Value = p?.percent ?? 0;
+            } catch {
+            }
         }
     }
 }

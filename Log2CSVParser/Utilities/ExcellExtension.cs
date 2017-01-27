@@ -6,7 +6,7 @@ using SpreadsheetLight;
 
 namespace Log2CSVParser.Utilities
 {
-    internal class ExcellExtension
+    public static class ExcellExtension
     {
 
         static List<string> CreateEnumerator(char start)
@@ -48,7 +48,7 @@ namespace Log2CSVParser.Utilities
 
                 List<string> collection = CreateEnumerator('A');
                 res.AddRange(collection);
-                for (char char1 = startUP[0];char1 <= stopUP[0];char1++)
+                for (char char1 = 'A';char1 <= stopUP[0];char1++)
                     res.AddRange(collection.Select(char2 => $"{char1}{char2}"));
 
                 while (true){
@@ -90,5 +90,30 @@ namespace Log2CSVParser.Utilities
                 log.Error(ex);
             }
         }
+
+
+        public static void SetCellValue_Custom(this SLDocument doc, string cellName, string data)
+        {
+            if (data.IndexOf(".") > 0){
+                float num;
+                if ((data.IndexOf("E-") > 0 || data.IndexOf("e+") > 0) && float.TryParse(data, out num)){
+                    doc.SetCellValue(cellName, num);
+                    return;
+                }
+            }
+
+            decimal dec;
+            if (decimal.TryParse(data, out dec)){
+                if (dec == 0){
+                    doc.SetCellValue(cellName, "");
+                    return;
+                }
+                doc.SetCellValue(cellName, dec);
+                return;
+            }
+
+            doc.SetCellValue(cellName, data);
+        }
+
     }
 }

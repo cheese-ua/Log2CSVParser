@@ -59,6 +59,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExcellCopier.cs" />
+    <Compile Include="GUI\ExcellExport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\ExcellExport.Designer.cs">
+      <DependentUpon>ExcellExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Log2Excell.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -81,12 +88,16 @@
     <Compile Include="Utilities\Extensions\ObjectExtension.cs" />
     <Compile Include="Utilities\Log\FileLogManager.cs" />
     <Compile Include="Utilities\Log\ILogManager.cs" />
+    <Compile Include="Utilities\Structures\ExRange.cs" />
     <Compile Include="Utilities\Structures\RollList.cs" />
     <Compile Include="Utilities\Structures\SimpleProcessResponse.cs" />
     <Compile Include="Utilities\Structures\Ticker.cs" />
     <Compile Include="Utilities\Structures\TickerEntry.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\ExcellExport.resx">
+      <DependentUpon>ExcellExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Log2Excell.resx">
       <DependentUpon>Log2Excell.cs</DependentUpon>

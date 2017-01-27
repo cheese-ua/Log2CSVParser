@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using Log2CSVParser.Utilities;
+﻿using System.Windows.Forms;
 using Log2CSVParser.Utilities.Log;
-using Log2CSVParser.Utilities.Structures;
 
 namespace Log2CSVParser
 {
@@ -15,10 +9,8 @@ namespace Log2CSVParser
         public FormMain()
         {
             InitializeComponent();
-            Text += " (" + Application.ProductVersion + ")";
+            Text += " (" + Application.ProductVersion + ") ";
         }
-
-
 
     }
 }
