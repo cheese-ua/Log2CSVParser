@@ -57,7 +57,7 @@ namespace Log2CSVParser
             for (int line = 1;line < 10000;line++){
                 string data = source.GetCellValueAsString($"{colNameSource}{line}");
                 newFile.SetCellValue_Custom($"{colNameTemplate}{line}", data);
-                log.Info(string.Format("{0}{1} => {2}{1}", colNameSource, line, colNameTemplate));
+                //log.Info(string.Format("{0}{1} => {2}{1}", colNameSource, line, colNameTemplate));
                 if (!string.IsNullOrEmpty(data))
                     emptyCount = 0;
                 else

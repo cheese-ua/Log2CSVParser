@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Log2CSVParser.Utilities.Log;
+using Log2CSVParser.Utilities.Structures;
 using SpreadsheetLight;
 
 namespace Log2CSVParser.Utilities
@@ -68,30 +69,6 @@ namespace Log2CSVParser.Utilities
             }   
         }
 
-        static void Test(ILogManager log)
-        {
-            try{
-                List<string> columns = CreateEnumeratorColumns("A", "zz", log);
-                log.Info(columns+"");
-
-
-                using (SLDocument sl = new SLDocument("E:\\Analyze\\UW\\CSV sample format - Copy.xlsx")) {
-                    List<string> sheetNames = sl.GetSheetNames();
-                    log.Info(sheetNames + "");
-                    sl.SelectWorksheet(sheetNames[1]);
-                    foreach (string column in columns){
-                        for (int i = 0;i < 10;i++){
-                            sl.SetCellValue(column + i, column + i+" "+DateTime.Now);
-                        }
-                    }
-                    sl.Save();
-                }
-            } catch (Exception ex){
-                log.Error(ex);
-            }
-        }
-
-
         public static void SetCellValue_Custom(this SLDocument doc, string cellName, string data)
         {
             if (data.IndexOf(".") > 0){
@@ -105,7 +82,7 @@ namespace Log2CSVParser.Utilities
             decimal dec;
             if (decimal.TryParse(data, out dec)){
                 if (dec == 0){
-                    doc.SetCellValue(cellName, "");
+                    doc.SetCellValue(cellName, Ticker.emptyCell);
                     return;
                 }
                 doc.SetCellValue(cellName, dec);

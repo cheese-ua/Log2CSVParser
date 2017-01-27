@@ -4,7 +4,7 @@ namespace Log2CSVParser.Utilities.Structures
 {
     public class Ticker
     {
-        const string emptyCell = "";
+        public const string emptyCell = " ";
         private static long counter;
         public long idx = ++counter;
 
@@ -27,16 +27,15 @@ namespace Log2CSVParser.Utilities.Structures
         public bool Valid()
         {
             return !string.IsNullOrEmpty(TickerName)
-                   && date.Ticks != DateTime.MinValue.Ticks
-                   && (BuyEntry != null || SellEntry != null);
+                   && date.Ticks != DateTime.MinValue.Ticks;
         }
 
         public string GetValueEntry(string name)
         {
             string entry;
-            if ((BuyEntry?.Name ?? "").Equals(name))
+            if ((BuyEntry?.Name ?? emptyCell).Equals(name))
                 entry =  BuyEntry?.Val ?? emptyCell;
-            else if ((SellEntry?.Name ?? "").Equals(name))
+            else if ((SellEntry?.Name ?? emptyCell).Equals(name))
                 entry=SellEntry?.Val ?? emptyCell;
             else
                 entry= emptyCell;

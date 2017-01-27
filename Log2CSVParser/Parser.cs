@@ -132,17 +132,17 @@ namespace Log2CSVParser
                 log.Info(columns[1] + currentRow+" => "+ oneTicker.TickerName);
                 pos = 2;
                 keys.ForEach(k => { excell.SetCellValue_Custom(columns[pos++] + currentRow, oneTicker.GetValueEntry(k)); });
-                excell.SetCellValue_Custom(columns[keys.Count + 2] + currentRow, oneTicker.PT);
-                excell.SetCellValue_Custom(columns[keys.Count + 3] + currentRow, oneTicker.STP0);
-                excell.SetCellValue_Custom(columns[keys.Count + 4] + currentRow, oneTicker.STP1);
-                excell.SetCellValue_Custom(columns[keys.Count + 5] + currentRow, oneTicker.STP2);
-                excell.SetCellValue_Custom(columns[keys.Count + 6] + currentRow, oneTicker.STP3);
-                excell.SetCellValue_Custom(columns[keys.Count + 7] + currentRow, oneTicker.TRLSTP);
-                excell.SetCellValue_Custom(columns[keys.Count + 8] + currentRow, oneTicker.BXL);
-                excell.SetCellValue_Custom(columns[keys.Count + 9] + currentRow, oneTicker.SXL);
-                excell.SetCellValue_Custom(columns[keys.Count + 10] + currentRow, oneTicker.SIZE);
-                excell.SetCellValue_Custom(columns[keys.Count + 11] + currentRow, oneTicker.SARBUY);
-                excell.SetCellValue_Custom(columns[keys.Count + 12] + currentRow, oneTicker.SARSELL);
+                excell.SetCellValue_Custom(columns[keys.Count + 2] + currentRow, oneTicker.PT ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 3] + currentRow, oneTicker.STP0 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 4] + currentRow, oneTicker.STP1 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 5] + currentRow, oneTicker.STP2 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 6] + currentRow, oneTicker.STP3 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 7] + currentRow, oneTicker.TRLSTP ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 8] + currentRow, oneTicker.BXL ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 9] + currentRow, oneTicker.SXL ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 10] + currentRow, oneTicker.SIZE ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 11] + currentRow, oneTicker.SARBUY ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[keys.Count + 12] + currentRow, oneTicker.SARSELL ?? Ticker.emptyCell);
 
                 prevTickerName = oneTicker.TickerName;
                 currentRow++;
@@ -188,20 +188,20 @@ namespace Log2CSVParser
 
                 excell.SetCellValue(columns[0] + currentRow, oneTicker.date.ToString("yyyy-MM-dd HH:mm:ss"));
                 excell.SetCellValue(columns[1] + currentRow, oneTicker.TickerName);
-                excell.SetCellValue_Custom(columns[2] + currentRow, oneTicker.BuyEntry?.Val ?? "");
-                excell.SetCellValue_Custom(columns[3] + currentRow, oneTicker.SellEntry?.Val ?? "");
+                excell.SetCellValue_Custom(columns[2] + currentRow, oneTicker.BuyEntry?.Val ??  Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[3] + currentRow, oneTicker.SellEntry?.Val ?? Ticker.emptyCell);
 
-                excell.SetCellValue_Custom(columns[4] + currentRow, oneTicker.PT);
-                excell.SetCellValue_Custom(columns[5] + currentRow, oneTicker.STP0);
-                excell.SetCellValue_Custom(columns[6] + currentRow, oneTicker.STP1);
-                excell.SetCellValue_Custom(columns[7] + currentRow, oneTicker.STP2);
-                excell.SetCellValue_Custom(columns[8] + currentRow, oneTicker.STP3);
-                excell.SetCellValue_Custom(columns[9] + currentRow, oneTicker.TRLSTP);
-                excell.SetCellValue_Custom(columns[10] + currentRow, oneTicker.BXL);
-                excell.SetCellValue_Custom(columns[11] + currentRow, oneTicker.SXL);
-                excell.SetCellValue_Custom(columns[12] + currentRow, oneTicker.SIZE);
-                excell.SetCellValue_Custom(columns[13] + currentRow, oneTicker.SARBUY);
-                excell.SetCellValue_Custom(columns[14] + currentRow, oneTicker.SARSELL);
+                excell.SetCellValue_Custom(columns[4] + currentRow, oneTicker.PT ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[5] + currentRow, oneTicker.STP0 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[6] + currentRow, oneTicker.STP1 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[7] + currentRow, oneTicker.STP2 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[8] + currentRow, oneTicker.STP3 ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[9] + currentRow, oneTicker.TRLSTP ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[10] + currentRow, oneTicker.BXL ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[11] + currentRow, oneTicker.SXL ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[12] + currentRow, oneTicker.SIZE ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[13] + currentRow, oneTicker.SARBUY ?? Ticker.emptyCell);
+                excell.SetCellValue_Custom(columns[14] + currentRow, oneTicker.SARSELL ?? Ticker.emptyCell);
 
                 prevTickerName = oneTicker.TickerName;
                 currentRow++;

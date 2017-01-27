@@ -212,7 +212,7 @@
             this.Controls.Add(this.ctrExSource);
             this.Controls.Add(this.ctrExSourceName);
             this.Name = "ExcellExport";
-            this.Size = new System.Drawing.Size(573, 247);
+            this.Size = new System.Drawing.Size(589, 276);
             this.ResumeLayout(false);
             this.PerformLayout();
 
