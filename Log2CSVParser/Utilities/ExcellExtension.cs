@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Log2CSVParser.Utilities.Log;
 using Log2CSVParser.Utilities.Structures;
-using SpreadsheetLight;
+using OfficeOpenXml;
+
 
 namespace Log2CSVParser.Utilities
 {
@@ -69,12 +70,17 @@ namespace Log2CSVParser.Utilities
             }   
         }
 
-        public static void SetCellValue_Custom(this SLDocument doc, string cellName, string data)
+        public static void SetCellValue(this ExcelWorksheet ws, string cellName, string data)
+        {
+            ws.Cells[cellName].Value = data;
+        }
+
+        public static void SetCellValue_Custom(this ExcelWorksheet ws, string cellName, string data)
         {
             if (data.IndexOf(".") > 0){
                 float num;
                 if ((data.IndexOf("E-") > 0 || data.IndexOf("e+") > 0) && float.TryParse(data, out num)){
-                    doc.SetCellValue(cellName, num);
+                    ws.Cells[cellName].Value = num;
                     return;
                 }
             }
@@ -82,14 +88,14 @@ namespace Log2CSVParser.Utilities
             decimal dec;
             if (decimal.TryParse(data, out dec)){
                 if (dec == 0){
-                    doc.SetCellValue(cellName, Config.EmptyCellValue);
+                    ws.Cells[cellName].Value = Config.EmptyCellValue;
                     return;
                 }
-                doc.SetCellValue(cellName, dec);
+                ws.Cells[cellName].Value = dec;
                 return;
             }
 
-            doc.SetCellValue(cellName, data);
+            ws.Cells[cellName].Value = data;
         }
 
     }

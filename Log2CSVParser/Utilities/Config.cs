@@ -6,7 +6,7 @@
 
         static Config()
         {
-            EmptyCellValue = "=\"\"";
+            EmptyCellValue = "";
         }
     }
 }

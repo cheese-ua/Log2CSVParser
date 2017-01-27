@@ -9,7 +9,8 @@ using Log2CSVParser.Utilities;
 using Log2CSVParser.Utilities.Extensions;
 using Log2CSVParser.Utilities.Log;
 using Log2CSVParser.Utilities.Structures;
-using SpreadsheetLight;
+using OfficeOpenXml;
+
 
 namespace Log2CSVParser
 {
@@ -59,9 +60,8 @@ namespace Log2CSVParser
                     File.Delete(fileResult);
 
                 using (StreamReader sr = new StreamReader(fileSource))
-                using (SLDocument excell = new SLDocument())
-                {
-
+                using (ExcelPackage excell = new ExcelPackage()) {
+                    var ws = excell.Workbook.Worksheets.Add("Content");
                     long allSize = sr.BaseStream.Length;
                     long current = 0;
                     string readLine;
@@ -81,11 +81,11 @@ namespace Log2CSVParser
                            select t).ToList()
                         : tickerList;
                     if (onlyBuySell) {
-                        FileFormat_BuySellColumns_Excell(sortedResult, excell, needSorting ? blankRows : 0);
+                        FileFormat_BuySellColumns_Excell(sortedResult, ws, needSorting ? blankRows : 0);
                     } else {
-                        FileFormat_AllColumns_Excell(sortedResult, excell, needSorting ? blankRows : 0);
+                        FileFormat_AllColumns_Excell(sortedResult, ws, needSorting ? blankRows : 0);
                     }
-                    excell.SaveAs(fileResult);
+                    excell.SaveAs(new FileInfo(fileResult));
                 }
 
 
@@ -96,7 +96,7 @@ namespace Log2CSVParser
             }
         }
 
-        private void FileFormat_AllColumns_Excell(List<Ticker> sortedResult, SLDocument excell, int rows)
+        private void FileFormat_AllColumns_Excell(List<Ticker> sortedResult, ExcelWorksheet excell, int rows)
         {
             Hashtable entriesName = CreateAllEntries(sortedResult);
             List<string> keys = entriesName.Keys.Cast<string>().OrderBy(k => k).ToList();
@@ -149,7 +149,7 @@ namespace Log2CSVParser
             }
         }
 
-        private void PrintEmptyLines_Excell(SLDocument excell, int rowCount, List<string> columns, int startRow)
+        private void PrintEmptyLines_Excell(ExcelWorksheet excell, int rowCount, List<string> columns, int startRow)
         {
             for (int i = 0;i < rowCount;i++){
                 foreach (string column in columns){
@@ -159,7 +159,7 @@ namespace Log2CSVParser
             }
         }
 
-        private void FileFormat_BuySellColumns_Excell(List<Ticker> sortedResult, SLDocument excell, int rows)
+        private void FileFormat_BuySellColumns_Excell(List<Ticker> sortedResult, ExcelWorksheet excell, int rows)
         {
             List<string> columns = ExcellExtension.CreateEnumeratorColumns(15, log);
             excell.SetCellValue(columns[0] + "1", "Date");

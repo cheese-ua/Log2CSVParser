@@ -9,8 +9,6 @@ using Log2CSVParser.Utilities.Extensions;
 using Log2CSVParser.Utilities.Log;
 using Log2CSVParser.Utilities.Structures;
 using OfficeOpenXml;
-using OfficeOpenXml.FormulaParsing;
-using SpreadsheetLight;
 using static System.Single;
 
 namespace Log2CSVParser
@@ -29,10 +27,10 @@ namespace Log2CSVParser
                 log.Info("Create new file: " + excellNewFile);
                 int allColumn = rangesSource.Sum(r => r.Count);
                 int currColumn = 1;
-                using (SLDocument source = new SLDocument(sourceFile))
-                using (SLDocument newFile = new SLDocument(excellNewFile)){
-                    source.SelectWorksheet(sourceFileWorksheet);
-                    newFile.SelectWorksheet(templateFileWorksheet);
+                using (ExcelPackage source = new ExcelPackage(new FileInfo(sourceFile)))
+                using (ExcelPackage newFile = new ExcelPackage(new FileInfo(excellNewFile))){
+                    var sourceWS = source.Workbook.Worksheets.First(w=> w.Name.Equals(sourceFileWorksheet));
+                    var temlateWS = newFile.Workbook.Worksheets.First(w => w.Name.Equals(templateFileWorksheet));
                     for (int rangeIdx = 0;rangeIdx < rangesSource.Count;rangeIdx++){
                         var colSource = rangesSource[rangeIdx];
                         var colTemplate = rangesTemplate[rangeIdx];
@@ -43,7 +41,7 @@ namespace Log2CSVParser
                             Application.DoEvents();
                             string colNameSource = colSource[columnsIdx];
                             string colNameTemplate = colTemplate[columnsIdx];
-                            CopyAllLines(source, newFile, colNameSource, colNameTemplate, log);
+                            CopyAllLines(sourceWS, temlateWS, colNameSource, colNameTemplate, log);
                         }
                         newFile.Save();
                     }
@@ -57,12 +55,12 @@ namespace Log2CSVParser
             }
         }
 
-        private static void CopyAllLines(SLDocument source, SLDocument newFile, string colNameSource, string colNameTemplate, ILogManager log)
+        private static void CopyAllLines(ExcelWorksheet source, ExcelWorksheet newFile, string colNameSource, string colNameTemplate, ILogManager log)
         {
             try{
                 int emptyCount = 0;
                 for (int line = 1;line < 10000;line++){
-                    string data = source.GetCellValueAsString($"{colNameSource}{line}");
+                    string data = (source.Cells[$"{colNameSource}{line}"].Value ?? "").ToString();
                     newFile.SetCellValue_Custom($"{colNameTemplate}{line}", data);
                     log.Info($"{colNameSource}{line} => {colNameTemplate}{line}: "+ data);
                     if (!string.IsNullOrEmpty(data))
@@ -79,8 +77,7 @@ namespace Log2CSVParser
 
         public static void Test()
         {
-            FileInfo newFile = new FileInfo("E:\\Analyze\\UW\\!Template_2.xlsx");
-            using (ExcelPackage pck = new ExcelPackage(newFile)){
+            using (ExcelPackage pck = new ExcelPackage(new FileInfo("E:\\Analyze\\UW\\!Template_2.xlsx"))){
                 using (ExcelWorksheets ws = pck.Workbook.Worksheets) {
                     ExcelWorksheet worksheet = ws.First();
                     worksheet.Cells["A1"].Value = "1000";

@@ -11,7 +11,8 @@ using System.Windows.Forms;
 using Log2CSVParser.Utilities;
 using Log2CSVParser.Utilities.Log;
 using Log2CSVParser.Utilities.Structures;
-using SpreadsheetLight;
+using OfficeOpenXml;
+
 
 namespace Log2CSVParser.GUI
 {
@@ -160,12 +161,14 @@ namespace Log2CSVParser.GUI
                 ctrExTemplateWs.DataSource = new List<string>();
                 if (!File.Exists(filePath))
                     return;
-                using (SLDocument source = new SLDocument(filePath)){
-                    List<string> list = source.GetSheetNames();
-                    ctrExTemplateWs.DataSource = list;
-                    if (list.Count > 0)
-                        ctrExTemplateWs.SelectedIndex = 0;
+                using (ExcelPackage pck = new ExcelPackage(new FileInfo(filePath))){
+                    using (ExcelWorksheets ws = pck.Workbook.Worksheets){
+                        List<string> list = ws.Select(w => w.Name).ToList();
+                        ctrExTemplateWs.DataSource = list;
+                        if (list.Count > 0)
+                            ctrExTemplateWs.SelectedIndex = 0;
 
+                    }
                 }
 
             } catch (Exception ex){
