@@ -82,7 +82,7 @@ namespace Log2CSVParser.Utilities
             decimal dec;
             if (decimal.TryParse(data, out dec)){
                 if (dec == 0){
-                    doc.SetCellValue(cellName, Ticker.emptyCell);
+                    doc.SetCellValue(cellName, Config.EmptyCellValue);
                     return;
                 }
                 doc.SetCellValue(cellName, dec);

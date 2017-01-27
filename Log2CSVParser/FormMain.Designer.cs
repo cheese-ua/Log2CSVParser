@@ -30,18 +30,22 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.log2Excell1 = new Log2CSVParser.GUI.Log2Excell();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.log2Excell1 = new Log2CSVParser.GUI.Log2Excell();
             this.excellExport1 = new Log2CSVParser.GUI.ExcellExport();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.commonSettings1 = new Log2CSVParser.GUI.CommonSettings();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -55,18 +59,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(539, 227);
+            this.tabPage1.Size = new System.Drawing.Size(590, 297);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Converter";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // log2Excell1
-            // 
-            this.log2Excell1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.log2Excell1.Location = new System.Drawing.Point(3, 3);
-            this.log2Excell1.Name = "log2Excell1";
-            this.log2Excell1.Size = new System.Drawing.Size(533, 221);
-            this.log2Excell1.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -79,6 +75,14 @@
             this.tabPage2.Text = "Export to Excell";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // log2Excell1
+            // 
+            this.log2Excell1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.log2Excell1.Location = new System.Drawing.Point(3, 3);
+            this.log2Excell1.Name = "log2Excell1";
+            this.log2Excell1.Size = new System.Drawing.Size(584, 291);
+            this.log2Excell1.TabIndex = 0;
+            // 
             // excellExport1
             // 
             this.excellExport1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -86,6 +90,25 @@
             this.excellExport1.Name = "excellExport1";
             this.excellExport1.Size = new System.Drawing.Size(584, 291);
             this.excellExport1.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.commonSettings1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(590, 297);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Common settings";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // commonSettings1
+            // 
+            this.commonSettings1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.commonSettings1.Location = new System.Drawing.Point(3, 3);
+            this.commonSettings1.Name = "commonSettings1";
+            this.commonSettings1.Size = new System.Drawing.Size(584, 291);
+            this.commonSettings1.TabIndex = 0;
             // 
             // FormMain
             // 
@@ -101,6 +124,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -111,6 +135,8 @@
         private System.Windows.Forms.TabPage tabPage2;
         private GUI.Log2Excell log2Excell1;
         private GUI.ExcellExport excellExport1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private GUI.CommonSettings commonSettings1;
     }
 }
 

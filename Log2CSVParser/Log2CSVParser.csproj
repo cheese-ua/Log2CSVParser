@@ -39,6 +39,9 @@
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>ExternalLib\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ExternalLib\NLog.dll</HintPath>
@@ -60,6 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcellCopier.cs" />
+    <Compile Include="GUI\CommonSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\CommonSettings.Designer.cs">
+      <DependentUpon>CommonSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\ExcellExport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -72,6 +81,7 @@
     <Compile Include="GUI\Log2Excell.Designer.cs">
       <DependentUpon>Log2Excell.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Config.cs" />
     <Compile Include="Utilities\ExcellExtension.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -85,6 +95,7 @@
     <Compile Include="Utilities\Extensions\DateTimeExtension.cs" />
     <Compile Include="Utilities\Extensions\ExceptionException.cs" />
     <Compile Include="Utilities\Extensions\HashtableExtension.cs" />
+    <Compile Include="Utilities\Extensions\ListExtension.cs" />
     <Compile Include="Utilities\Extensions\ObjectExtension.cs" />
     <Compile Include="Utilities\Log\FileLogManager.cs" />
     <Compile Include="Utilities\Log\ILogManager.cs" />
@@ -95,6 +106,9 @@
     <Compile Include="Utilities\Structures\TickerEntry.cs" />
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\CommonSettings.resx">
+      <DependentUpon>CommonSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\ExcellExport.resx">
       <DependentUpon>ExcellExport.cs</DependentUpon>

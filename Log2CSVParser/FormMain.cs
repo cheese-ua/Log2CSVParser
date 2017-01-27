@@ -10,6 +10,8 @@ namespace Log2CSVParser
         {
             InitializeComponent();
             Text += " (" + Application.ProductVersion + ") ";
+            tabControl1.TabPages.RemoveAt(2);
+            ExcellCopier.Test();
         }
 
     }

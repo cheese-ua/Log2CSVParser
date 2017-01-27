@@ -8,6 +8,8 @@ using Log2CSVParser.Utilities;
 using Log2CSVParser.Utilities.Extensions;
 using Log2CSVParser.Utilities.Log;
 using Log2CSVParser.Utilities.Structures;
+using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing;
 using SpreadsheetLight;
 using static System.Single;
 
@@ -20,9 +22,11 @@ namespace Log2CSVParser
         public SimpleProcessResponse Copy(string sourceFile, string sourceFileWorksheet, List<List<string>> rangesSource, string templateFile, string templateFileWorksheet, List<List<string>> rangesTemplate, ILogManager log)
         {
             try{
+                log.Info("");
+                log.Info($"Copy cell from [file: \"{sourceFile}\", worksheet: {sourceFileWorksheet}, range: {rangesSource.Select(r => r.ToStringWithDelimeter(":")).ToList().ToStringWithDelimeter(";")}] to [file: \"{templateFile}\", worksheet: {templateFileWorksheet}, range: {rangesTemplate.Select(r => r.ToStringWithDelimeter(":")).ToList().ToStringWithDelimeter(";")}]");
                 string excellNewFile = Path.Combine(Path.GetDirectoryName(templateFile) ?? "", Path.GetFileNameWithoutExtension(templateFile) + "_" + DateTime.Now.ToString("MMddyyyy_HHmmss") + ".xlsx");
                 File.Copy(templateFile, excellNewFile);
-
+                log.Info("Create new file: " + excellNewFile);
                 int allColumn = rangesSource.Sum(r => r.Count);
                 int currColumn = 1;
                 using (SLDocument source = new SLDocument(sourceFile))
@@ -41,13 +45,15 @@ namespace Log2CSVParser
                             string colNameTemplate = colTemplate[columnsIdx];
                             CopyAllLines(source, newFile, colNameSource, colNameTemplate, log);
                         }
+                        newFile.Save();
                     }
-                    newFile.Save();
                 }
                 return SimpleProcessResponse.Success(excellNewFile);
             } catch (Exception ex){
                 log.Error(ex);
                 return SimpleProcessResponse.Fail("System error: " + ex.Message);
+            } finally{
+                log.Info("End copy process");
             }
         }
 
@@ -58,7 +64,7 @@ namespace Log2CSVParser
                 for (int line = 1;line < 10000;line++){
                     string data = source.GetCellValueAsString($"{colNameSource}{line}");
                     newFile.SetCellValue_Custom($"{colNameTemplate}{line}", data);
-                    //log.Info(string.Format("{0}{1} => {2}{1}", colNameSource, line, colNameTemplate));
+                    log.Info($"{colNameSource}{line} => {colNameTemplate}{line}: "+ data);
                     if (!string.IsNullOrEmpty(data))
                         emptyCount = 0;
                     else
@@ -70,5 +76,18 @@ namespace Log2CSVParser
                 log.Error(ex);
             }
         }
+
+        public static void Test()
+        {
+            FileInfo newFile = new FileInfo("E:\\Analyze\\UW\\!Template_2.xlsx");
+            using (ExcelPackage pck = new ExcelPackage(newFile)){
+                using (ExcelWorksheets ws = pck.Workbook.Worksheets) {
+                    ExcelWorksheet worksheet = ws.First();
+                    worksheet.Cells["A1"].Value = "1000";
+                    pck.Save();
+                }
+            }
+        }
+
     }
 }

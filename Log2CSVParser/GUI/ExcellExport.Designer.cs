@@ -49,7 +49,7 @@
             // 
             // ctrBtStart
             // 
-            this.ctrBtStart.Location = new System.Drawing.Point(475, 207);
+            this.ctrBtStart.Location = new System.Drawing.Point(475, 224);
             this.ctrBtStart.Name = "ctrBtStart";
             this.ctrBtStart.Size = new System.Drawing.Size(75, 23);
             this.ctrBtStart.TabIndex = 43;
@@ -112,6 +112,7 @@
             // 
             this.ctrExTemplateName.Location = new System.Drawing.Point(29, 128);
             this.ctrExTemplateName.Name = "ctrExTemplateName";
+            this.ctrExTemplateName.ReadOnly = true;
             this.ctrExTemplateName.Size = new System.Drawing.Size(440, 20);
             this.ctrExTemplateName.TabIndex = 36;
             this.ctrExTemplateName.TextChanged += new System.EventHandler(this.ctrExTemplateName_TextChanged);
@@ -139,6 +140,7 @@
             // 
             this.ctrExSourceName.Location = new System.Drawing.Point(29, 26);
             this.ctrExSourceName.Name = "ctrExSourceName";
+            this.ctrExSourceName.ReadOnly = true;
             this.ctrExSourceName.Size = new System.Drawing.Size(440, 20);
             this.ctrExSourceName.TabIndex = 33;
             this.ctrExSourceName.TextChanged += new System.EventHandler(this.ctrExSourceName_TextChanged);
@@ -181,7 +183,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(13, 207);
+            this.progressBar.Location = new System.Drawing.Point(13, 224);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(440, 23);
             this.progressBar.TabIndex = 49;
@@ -212,7 +214,7 @@
             this.Controls.Add(this.ctrExSource);
             this.Controls.Add(this.ctrExSourceName);
             this.Name = "ExcellExport";
-            this.Size = new System.Drawing.Size(589, 276);
+            this.Size = new System.Drawing.Size(607, 269);
             this.ResumeLayout(false);
             this.PerformLayout();
 

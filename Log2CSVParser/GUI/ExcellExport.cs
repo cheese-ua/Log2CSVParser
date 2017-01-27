@@ -148,18 +148,16 @@ namespace Log2CSVParser.GUI
 
         private void ctrExSourceName_TextChanged(object sender, EventArgs e)
         {
-            UpdateWorksheet(ctrExSourceName.Text, ctrExSourceWS);
         }
 
         private void ctrExTemplateName_TextChanged(object sender, EventArgs e)
         {
-            UpdateWorksheet(ctrExTemplateName.Text, ctrExTemplateWS);
         }
 
         private void UpdateWorksheet(string filePath, ComboBox ctrExTemplateWs)
         {
             try{
-                ctrExTemplateWs.Items.Clear();
+                ctrExTemplateWs.DataSource = new List<string>();
                 if (!File.Exists(filePath))
                     return;
                 using (SLDocument source = new SLDocument(filePath)){
