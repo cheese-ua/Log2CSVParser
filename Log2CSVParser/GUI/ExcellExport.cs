@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -94,10 +95,13 @@ namespace Log2CSVParser.GUI
                 timer.Enabled = true;
                 SimpleProcessResponse response = (copier = new ExcellCopier()).Copy(sourceFile, ctrExSourceWS.SelectedItem.ToString(), rangesSource, templateFile, ctrExTemplateWS.SelectedItem.ToString(), rangesTemplate, log);
                 timer.Enabled = false;
-                if (response.isOk)
-                    MessageBox.Show("Successfully completed");
-                else
-                    MessageBox.Show("Completed with errors\n" + response.message);
+                if (response.isOk){
+                    if (MessageBox.Show("Created new file: " + response.message + "\nDo you want to open it now?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes){
+                        return;
+                    }
+                    Process.Start(response.message);
+                } else
+                    MessageBox.Show("Completed with errors\n" + response.message, "Error");
 
             } catch (Exception ex){
                 log.Error(ex);

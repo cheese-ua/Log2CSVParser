@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -61,8 +62,13 @@ namespace Log2CSVParser.GUI
                 timer.Enabled = true;
                 SimpleProcessResponse response = p.Start();
                 timer.Enabled = false;
-                if (response.isOk)
-                    MessageBox.Show("Successfully completed");
+                if (response.isOk){
+                    if (MessageBox.Show("Successfully completed\nDo you want to open it now?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes) {
+                        return;
+                    }
+                    Process.Start(fileRes);
+
+                }
                 else
                     MessageBox.Show("Completed with errors\n" + response.message);
 
