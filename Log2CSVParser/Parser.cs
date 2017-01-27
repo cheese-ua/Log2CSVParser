@@ -67,7 +67,7 @@ namespace Log2CSVParser
                     string readLine;
                     while (null != (readLine = sr.ReadLine())) {
                         current += readLine.Length;
-                        percent = allSize == 0 ? 0 : (int)(current * 100 / (decimal)allSize);
+                        percent = allSize == 0 ? 0 : (int)(current * 50 / (decimal)allSize);
                         ProcessLine(readLine);
                         Application.DoEvents();
                     }
@@ -121,7 +121,11 @@ namespace Log2CSVParser
 
             string prevTickerName = "";
             int currentRow = 2;
-            foreach (Ticker oneTicker in sortedResult) {
+            int len = sortedResult.Count;
+            foreach (Ticker oneTicker in sortedResult){
+                percent = 50 + (int)((currentRow - 2)*50/(decimal)len);
+                if(currentRow % 10 == 0)
+                    Application.DoEvents();
                 if (rows > 0 && prevTickerName.Length > 0 && !prevTickerName.Equals(oneTicker.TickerName)){
                     PrintEmptyLines_Excell(excell, rows, columns, currentRow);
                     currentRow += rows;
@@ -155,7 +159,7 @@ namespace Log2CSVParser
                 foreach (string column in columns){
                     excell.SetCellValue(column + (startRow+i), "");
                 }
-                log.Info("ROW" + (startRow + i) + " => clear");
+                //log.Info("ROW" + (startRow + i) + " => clear");
             }
         }
 
@@ -180,7 +184,12 @@ namespace Log2CSVParser
 
             string prevTickerName = "";
             int currentRow = 2;
+            int len = sortedResult.Count;
             foreach (Ticker oneTicker in sortedResult) {
+                percent = 50 + (int)((currentRow - 2) * 50 / (decimal)len);
+                if (currentRow % 10 == 0)
+                    Application.DoEvents();
+
                 if (rows > 0 && prevTickerName.Length > 0 && !prevTickerName.Equals(oneTicker.TickerName)) {
                     PrintEmptyLines_Excell(excell, rows, columns, currentRow);
                     currentRow += rows;

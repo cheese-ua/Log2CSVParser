@@ -14,5 +14,9 @@ namespace Log2CSVParser
             //ExcellCopier.Test();
         }
 
+        private void log2Excell1_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }

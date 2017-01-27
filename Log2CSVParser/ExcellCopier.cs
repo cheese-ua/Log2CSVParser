@@ -21,7 +21,7 @@ namespace Log2CSVParser
         {
             try{
                 log.Info("");
-                log.Info($"Copy cell from [file: \"{sourceFile}\", worksheet: {sourceFileWorksheet}, range: {rangesSource.Select(r => r.ToStringWithDelimeter(":")).ToList().ToStringWithDelimeter(";")}] to [file: \"{templateFile}\", worksheet: {templateFileWorksheet}, range: {rangesTemplate.Select(r => r.ToStringWithDelimeter(":")).ToList().ToStringWithDelimeter(";")}]");
+                log.Info($"Copy cell from [file: \"{sourceFile}\", worksheet: {sourceFileWorksheet}, range: {rangesSource.Select(r => r[0]+":"+r[r.Count-1]).ToList().ToStringWithDelimeter(";")}] to [file: \"{templateFile}\", worksheet: {templateFileWorksheet}, range: {rangesTemplate.Select(r => r[0] + ":" + r[r.Count - 1]).ToList().ToStringWithDelimeter(";")}]");
                 string excellNewFile = Path.Combine(Path.GetDirectoryName(templateFile) ?? "", Path.GetFileNameWithoutExtension(templateFile) + "_" + DateTime.Now.ToString("MMddyyyy_HHmmss") + ".xlsx");
                 File.Copy(templateFile, excellNewFile);
                 log.Info("Create new file: " + excellNewFile);
@@ -43,7 +43,9 @@ namespace Log2CSVParser
                             string colNameTemplate = colTemplate[columnsIdx];
                             CopyAllLines(sourceWS, temlateWS, colNameSource, colNameTemplate, log);
                         }
+                        log.Info("Begin save file");
                         newFile.Save();
+                        log.Info("Saving completed");
                     }
                 }
                 return SimpleProcessResponse.Success(excellNewFile);
@@ -62,7 +64,7 @@ namespace Log2CSVParser
                 for (int line = 1;line < 10000;line++){
                     string data = (source.Cells[$"{colNameSource}{line}"].Value ?? "").ToString();
                     newFile.SetCellValue_Custom($"{colNameTemplate}{line}", data);
-                    log.Info($"{colNameSource}{line} => {colNameTemplate}{line}: "+ data);
+                    //log.Info($"{colNameSource}{line} => {colNameTemplate}{line}: "+ data);
                     if (!string.IsNullOrEmpty(data))
                         emptyCount = 0;
                     else
@@ -75,16 +77,5 @@ namespace Log2CSVParser
             }
         }
 
-        public static void Test()
-        {
-            using (ExcelPackage pck = new ExcelPackage(new FileInfo("E:\\Analyze\\UW\\!Template_2.xlsx"))){
-                using (ExcelWorksheets ws = pck.Workbook.Worksheets) {
-                    ExcelWorksheet worksheet = ws.First();
-                    worksheet.Cells["A1"].Value = "1000";
-                    pck.Save();
-                }
-            }
-        }
-
-    }
+      }
 }

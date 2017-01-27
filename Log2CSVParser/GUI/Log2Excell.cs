@@ -61,6 +61,8 @@ namespace Log2CSVParser.GUI
                 p = new Parser(fileSource, fileRes, ctrChBoxIsOrder.Checked, ctrUseOnlySellBuy.Checked, filter, (int)ctrNumRows.Value, log);
                 timer.Enabled = true;
                 SimpleProcessResponse response = p.Start();
+                progressBar.Value = 100;
+                Application.DoEvents();
                 timer.Enabled = false;
                 if (response.isOk){
                     if (MessageBox.Show("Successfully completed\nDo you want to open it now?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes) {

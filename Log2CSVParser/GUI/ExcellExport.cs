@@ -96,6 +96,8 @@ namespace Log2CSVParser.GUI
                 timer.Enabled = true;
                 SimpleProcessResponse response = (copier = new ExcellCopier()).Copy(sourceFile, ctrExSourceWS.SelectedItem.ToString(), rangesSource, templateFile, ctrExTemplateWS.SelectedItem.ToString(), rangesTemplate, log);
                 timer.Enabled = false;
+                progressBar.Value = 100;
+                Application.DoEvents();
                 if (response.isOk){
                     if (MessageBox.Show("Created new file: " + response.message + "\nDo you want to open it now?", "Success", MessageBoxButtons.YesNo, MessageBoxIcon.Information) != DialogResult.Yes){
                         return;
