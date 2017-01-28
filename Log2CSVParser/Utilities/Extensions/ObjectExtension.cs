@@ -13,7 +13,7 @@ namespace Log2CSVParser.Utilities.Extensions
                 return defaultValue;
             }
         }
-
+        
         public static float ToFloat(this object item)
         {
             if (string.IsNullOrEmpty(item?.ToString()))

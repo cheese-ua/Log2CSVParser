@@ -29,6 +29,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.ctrTBEmptyCell = new System.Windows.Forms.TextBox();
+            this.ctrReplaceZero = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -48,10 +49,22 @@
             this.ctrTBEmptyCell.TabIndex = 36;
             this.ctrTBEmptyCell.TextChanged += new System.EventHandler(this.ctrTBEmptyCell_TextChanged);
             // 
+            // ctrReplaceZero
+            // 
+            this.ctrReplaceZero.AutoSize = true;
+            this.ctrReplaceZero.Location = new System.Drawing.Point(18, 69);
+            this.ctrReplaceZero.Name = "ctrReplaceZero";
+            this.ctrReplaceZero.Size = new System.Drawing.Size(135, 17);
+            this.ctrReplaceZero.TabIndex = 38;
+            this.ctrReplaceZero.Text = "Replace zeroes with \"\"";
+            this.ctrReplaceZero.UseVisualStyleBackColor = true;
+            this.ctrReplaceZero.CheckedChanged += new System.EventHandler(this.ctrReplaceZero_CheckedChanged);
+            // 
             // CommonSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ctrReplaceZero);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ctrTBEmptyCell);
             this.Name = "CommonSettings";
@@ -65,5 +78,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox ctrTBEmptyCell;
+        private System.Windows.Forms.CheckBox ctrReplaceZero;
     }
 }

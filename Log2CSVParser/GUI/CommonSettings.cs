@@ -16,11 +16,17 @@ namespace Log2CSVParser.GUI
         {
             InitializeComponent();
             ctrTBEmptyCell.Text = Config.EmptyCellValue;
+            ctrReplaceZero.Checked = Config.ReplaceZero;
         }
 
         private void ctrTBEmptyCell_TextChanged(object sender, EventArgs e)
         {
             Config.EmptyCellValue = ctrTBEmptyCell.Text;
+        }
+
+        private void ctrReplaceZero_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.ReplaceZero = ctrReplaceZero.Checked;
         }
     }
 }

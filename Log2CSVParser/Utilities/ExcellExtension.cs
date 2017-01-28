@@ -70,6 +70,9 @@ namespace Log2CSVParser.Utilities
             }   
         }
 
+
+
+
         public static void SetCellValue(this ExcelWorksheet ws, string cellName, string data)
         {
             ws.Cells[cellName].Value = data;
@@ -87,7 +90,7 @@ namespace Log2CSVParser.Utilities
 
             decimal dec;
             if (decimal.TryParse(data, out dec)){
-                if (dec == 0){
+                if (dec == 0 && Config.ReplaceZero) {
                     ws.Cells[cellName].Value = Config.EmptyCellValue;
                     return;
                 }
